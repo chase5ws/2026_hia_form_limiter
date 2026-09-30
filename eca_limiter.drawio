@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ECA 系統軟體架構圖 (SA)" id="p4TMF_H_8WmYlcCgs-0L">
+    <mxGraphModel dx="964" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1E293B;" value="課後社團 (ECA) 自動化選課系統 — 軟體架構圖 (SA Architecture)" vertex="1">
+          <mxGeometry height="40" width="670" x="340" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-2" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;fontStyle=1;fontSize=14;fontColor=#1E3A8A;rounded=1;shadow=1;" value="1. 用戶介面與展示層 (Presentation Layer)" vertex="1">
+          <mxGeometry height="150" width="1140" x="90" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-3" parent="QYVWqjrwugcvQBpgwcZD-2" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#DBEAFE;strokeColor=#2563EB;fontStyle=1;" value="學生 / 家長&#xa;(使用者)" vertex="1">
+          <mxGeometry height="60" width="30" x="60" y="37.5" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-4" parent="QYVWqjrwugcvQBpgwcZD-2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontSize=12;fontColor=#1E293B;align=left;spacingLeft=15;" value="Google Forms 填寫前端&lt;br&gt;• 允許回覆編輯 (Response Editing)&lt;br&gt;• 動態名額標籤 [剩餘 X 名] / [最後 1 名!]" vertex="1">
+          <mxGeometry height="65" width="280" x="190" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-5" parent="QYVWqjrwugcvQBpgwcZD-2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B82F6;strokeWidth=2;fontSize=12;fontColor=#1E293B;align=left;spacingLeft=15;" value="學生收件匣 (Gmail / Outlook)&#xa;• 收到超額候補與重新選課通知&#xa;• 附帶專屬直接編輯連結 (EditResponseUrl)" vertex="1">
+          <mxGeometry height="65" width="290" x="737" y="37.5" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-6" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;fontStyle=1;fontSize=14;fontColor=#14532D;rounded=1;shadow=1;" value="2. 頂層調度與控制層 (Controller Layer) — Main.gs" vertex="1">
+          <mxGeometry height="130" width="1140" x="90" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-7" parent="QYVWqjrwugcvQBpgwcZD-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontStyle=1;fontSize=13;fontColor=#166534;" value="⚡ oneClickSetup()&#xa;一鍵全自動部署發佈入口&#xa;(選單唯一對外暴顯示函數)" vertex="1">
+          <mxGeometry height="60" width="220" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-8" parent="QYVWqjrwugcvQBpgwcZD-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#22C55E;strokeWidth=1.5;fontSize=12;fontColor=#1E293B;align=left;spacingLeft=15;" value="私有觸發進入點 (Private Event Handlers)&#xa;• mainOnFormSubmit_(e) : 表單提交審核&#xa;• mainOpenForm_() : 定時開啟表單&#xa;• mainCloseForm_() : 定時關閉表單" vertex="1">
+          <mxGeometry height="60" width="310" x="480" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-37" edge="1" parent="QYVWqjrwugcvQBpgwcZD-6" source="QYVWqjrwugcvQBpgwcZD-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="QYVWqjrwugcvQBpgwcZD-7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="65" />
+              <mxPoint x="180" y="65" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-9" parent="QYVWqjrwugcvQBpgwcZD-6" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#DCFCE7;strokeColor=#16A34A;fontStyle=1;" value="學校系統管理員&#xa;(Admin / IT)" vertex="1">
+          <mxGeometry height="60" width="30" x="60" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-10" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontStyle=1;fontSize=14;fontColor=#78350F;rounded=1;shadow=1;" value="3. 系統設定與業務契約層 (Configuration &amp; Domain Contract)" vertex="1">
+          <mxGeometry height="130" width="1140" x="90" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-11" parent="QYVWqjrwugcvQBpgwcZD-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=2;fontSize=12;fontColor=#1E293B;align=left;spacingLeft=15;" value="Config.gs (系統環境常數)&#xa;• FORM_ID : 表單唯一識別碼&#xa;• DEFAULT_LIMIT : 默認名額 (20)&#xa;• SCHEDULE_CONFIG : 開啟/關閉排程&#xa;• CLOSED_FORM_MESSAGE : 提示訊息" vertex="1">
+          <mxGeometry height="75" width="320" x="120" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-12" parent="QYVWqjrwugcvQBpgwcZD-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=2;fontSize=12;fontColor=#1E293B;align=left;spacingLeft=15;" value="ECALimiter.gs (宣告式社團清單與限額)&#xa;• 支援指定限額：{ name: &quot;...&quot;, limit: 15 }&#xa;• 支援繼承默認：{ name: &quot;...&quot;, limit: &quot;default&quot; }&#xa;• 代碼優先維護 (Code-First Single Source of Truth)" vertex="1">
+          <mxGeometry height="75" width="340" x="470" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-25" edge="1" parent="QYVWqjrwugcvQBpgwcZD-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;fontColor=#6D28D9;fontSize=11;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="QYVWqjrwugcvQBpgwcZD-14" value="調度排程與名額引擎">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="769.9" y="130" />
+              <mxPoint x="140" y="130" />
+            </Array>
+            <mxPoint x="830" y="130" as="sourcePoint" />
+            <mxPoint x="249.93000000000023" y="315" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-13" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FAF5FF;strokeColor=#A855F7;fontStyle=1;fontSize=14;fontColor=#581C87;rounded=1;shadow=1;" value="4. 核心領域服務與運算引擎層 (Core Domain &amp; Infrastructure Layer) — Functions.gs" vertex="1">
+          <mxGeometry height="210" width="1140" x="90" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-14" parent="QYVWqjrwugcvQBpgwcZD-13" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A855F7;strokeWidth=1.5;fontSize=11;fontColor=#1E293B;align=left;spacingLeft=10;" value="TriggerService&#xa;(觸發器生命週期管理)&#xa;• 自動清理既有舊 Trigger&#xa;• 建立 FormSubmitTrigger&#xa;• 安全時間解析 (Regex Parser)&#xa;• 建立 Time-based Triggers" vertex="1">
+          <mxGeometry height="140" width="200" x="40" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-15" parent="QYVWqjrwugcvQBpgwcZD-13" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A855F7;strokeWidth=1.5;fontSize=11;fontColor=#1E293B;align=left;spacingLeft=10;" value="FormService&#xa;(表單生命週期狀態維護)&#xa;• openForm(): 開啟接收回覆&#xa;• closeForm(): 停收回覆並注入&#xa;  Jupiter 客製化行政聯繫提示" vertex="1">
+          <mxGeometry height="140" width="200" x="270" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-16" parent="QYVWqjrwugcvQBpgwcZD-13" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;strokeWidth=2;fontStyle=1;fontSize=11;fontColor=#3B0764;align=left;spacingLeft=12;" value="QuotaEngine (核心名額控制器)&#xa;• 悲觀鎖控制 (LockService 15-20s 排隊佇列)&#xa;• auditAllResponses(): 時間戳排序、去重 (Latest-Wins)&#xa;• 正規化回歸解析 (RegEx Clean Labeling)&#xa;• 錄取判定 (Quota Check) vs 候補名單分流 (Waitlist)&#xa;• sendWaitlistNotification(): 發送信件通知重選&#xa;• updateFormChoices(): 動態渲染 [剩餘名額] / 下架滿額社團" vertex="1">
+          <mxGeometry height="140" width="370" x="500" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-17" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;fontStyle=1;fontSize=14;fontColor=#0F172A;rounded=1;shadow=1;" value="5. 外部 Google Workspace 服務層 (External Cloud Infrastructure)" vertex="1">
+          <mxGeometry height="110" width="1140" x="90" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-18" parent="QYVWqjrwugcvQBpgwcZD-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.5;fontSize=12;fontColor=#1E293B;" value="LockService&#xa;(並發互斥鎖機制)" vertex="1">
+          <mxGeometry height="50" width="150" x="70" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-19" parent="QYVWqjrwugcvQBpgwcZD-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.5;fontSize=12;fontColor=#1E293B;" value="FormApp&#xa;(Google 表單物件操作)" vertex="1">
+          <mxGeometry height="50" width="170" x="270" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-20" parent="QYVWqjrwugcvQBpgwcZD-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.5;fontSize=12;fontColor=#1E293B;" value="ScriptApp&#xa;(排程事件與觸發器服務)" vertex="1">
+          <mxGeometry height="50" width="170" x="490" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-21" parent="QYVWqjrwugcvQBpgwcZD-17" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748B;strokeWidth=1.5;fontSize=12;fontColor=#1E293B;" value="MailApp&#xa;(SMTP 郵件發送服務)" vertex="1">
+          <mxGeometry height="50" width="160" x="710" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-22" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;" target="QYVWqjrwugcvQBpgwcZD-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-26" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#7C3AED;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="QYVWqjrwugcvQBpgwcZD-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880.07" y="505.07" />
+              <mxPoint x="920.07" y="505.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-27" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=1.5;dashed=1;" target="QYVWqjrwugcvQBpgwcZD-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="730" />
+              <mxPoint x="775" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-28" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D97706;strokeWidth=1.5;dashed=1;" target="QYVWqjrwugcvQBpgwcZD-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="730" />
+              <mxPoint x="775" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-29" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=2;fontColor=#B91C1C;fontSize=11;" target="QYVWqjrwugcvQBpgwcZD-21" value="超額發送候補重選信">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="960" />
+              <mxPoint x="880" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-30" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#DC2626;strokeWidth=1.5;dashed=1;" target="QYVWqjrwugcvQBpgwcZD-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="1055" />
+              <mxPoint x="1060" y="338" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-31" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.5;dashed=1;fontColor=#334155;fontSize=11;" target="QYVWqjrwugcvQBpgwcZD-4" value="點擊連結重選未錄取選項">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-32" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748B;strokeWidth=1.5;" target="QYVWqjrwugcvQBpgwcZD-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="970" />
+              <mxPoint x="235" y="970" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-33" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;fontColor=#1E40AF;fontSize=11;" target="QYVWqjrwugcvQBpgwcZD-19" value="動態更新選項/額滿剃除">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="970" />
+              <mxPoint x="445" y="970" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QYVWqjrwugcvQBpgwcZD-35" edge="1" parent="1" source="QYVWqjrwugcvQBpgwcZD-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2563EB;strokeWidth=2;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.554;entryY=0.033;entryDx=0;entryDy=0;entryPerimeter=0;" target="QYVWqjrwugcvQBpgwcZD-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490.07" y="400" />
+              <mxPoint x="741.67" y="400" />
+            </Array>
+            <mxPoint x="550" y="370" as="sourcePoint" />
+            <mxPoint x="650" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
