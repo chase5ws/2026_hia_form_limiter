@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install clasp
         run: sudo npm install -g @google/clasp
@@ -27,9 +27,16 @@ jobs:
           SCRIPT_ID: ${{ secrets.SCRIPT_ID }}
         run: |
           mkdir -p ~/.clasp
-          echo "$CLASPRC_B64" | base64 -d > ~/.clasprc.json
-          chmod 600 ~/.clasprc.json
-          node -e "fs.writeFileSync('.clasp.json', JSON.stringify({ scriptId: process.env.SCRIPT_ID, rootDir: '.' }))"
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const os = require('os');
+            const clasprc = Buffer.from(process.env.CLASPRC_B64, 'base64').toString('utf-8');
+            fs.writeFileSync(path.join(os.homedir(), '.clasprc.json'), clasprc, { mode: 0o600 });
+            fs.writeFileSync('.clasp.json', JSON.stringify({ scriptId: process.env.SCRIPT_ID, rootDir: '.' }));
+          "
 
       - name: Push to Google Apps Script
-        run: clasp push --force
+        run: |
+          clasp status
+          clasp push --force
