@@ -3,7 +3,7 @@ name: Deploy to Google Apps Script
 on:
   push:
     branches:
-      - main # 當 main 分支有 push 時自動觸發
+      - main
 
 jobs:
   deploy:
@@ -21,14 +21,15 @@ jobs:
       - name: Install clasp
         run: sudo npm install -g @google/clasp
 
-      - name: Create clasp auth file
+      - name: Create clasp auth and config files
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+          SCRIPT_ID: ${{ secrets.SCRIPT_ID }}
         run: |
-          echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+          mkdir -p ~/.clasp
+          echo "$CLASPRC_JSON" > ~/.clasprc.json
           chmod 600 ~/.clasprc.json
-
-      - name: Create .clasp.json config
-        run: |
-          echo '{"scriptId":"${{ secrets.SCRIPT_ID }}","rootDir":"."}' > .clasp.json
+          echo "{\"scriptId\":\"$SCRIPT_ID\",\"rootDir\":\".\"}" > .clasp.json
 
       - name: Push to Google Apps Script
         run: clasp push --force
