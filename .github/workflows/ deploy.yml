@@ -21,15 +21,15 @@ jobs:
       - name: Install clasp
         run: sudo npm install -g @google/clasp
 
-      - name: Create clasp auth and config files
+      - name: Setup clasp credentials
         env:
-          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+          CLASPRC_B64: ${{ secrets.CLASPRC_JSON }}
           SCRIPT_ID: ${{ secrets.SCRIPT_ID }}
         run: |
           mkdir -p ~/.clasp
-          echo "$CLASPRC_JSON" > ~/.clasprc.json
+          echo "$CLASPRC_B64" | base64 -d > ~/.clasprc.json
           chmod 600 ~/.clasprc.json
-          echo "{\"scriptId\":\"$SCRIPT_ID\",\"rootDir\":\".\"}" > .clasp.json
+          node -e "fs.writeFileSync('.clasp.json', JSON.stringify({ scriptId: process.env.SCRIPT_ID, rootDir: '.' }))"
 
       - name: Push to Google Apps Script
         run: clasp push --force
