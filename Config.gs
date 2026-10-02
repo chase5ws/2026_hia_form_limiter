@@ -8,8 +8,8 @@ const FORM_ID = "1eO8Dt1GjlW0Y0iQu7YJwin55utJZVaIBNQrSN3Orubg";
 const DEFAULT_LIMIT = 1;
 
 const SCHEDULE_CONFIG = {
-  OPEN_TIME: "2026-09-29 17:25:00",
-  CLOSE_TIME: "2026-09-29 17:30:00"
+  OPEN_TIME: "2026-10-02 12:25:00",
+  CLOSE_TIME: "2026-10-05 17:30:00"
 };
 
 const CLOSED_FORM_MESSAGE = "ECA selection has closed. f you need to request changes, please contact the Staff Office via Jupiter Messages.";
